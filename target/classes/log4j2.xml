@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="filename">c:/jkthome/jktlog.log</Property>
+	</Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %5p [%c] %m%n" />
+        </Console>
+        <!-- <RollingFile name="rollingFile" fileName="${filename}" filePattern="${filename}.%d{yyyy-MM-dd-HH}">
+			<PatternLayout pattern="[%5p][%d{yyyy-MM-dd HH:mm:ss:}%r] [%C{6}] - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile> -->
+    </Appenders>
+    <Loggers>
+        <Logger name="java.sql" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="org.mybatis.spring" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+        <Logger name="com.jkthome" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+		<!-- log SQL with timing information, post execution -->
+	    <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+	    <Logger name="org.springframework" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+	    
+        <Root level="ERROR">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="jkthome.propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/jkthome/config/globals.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+	<!-- SqlMap setup for myBATIS Database Layer -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:/jkthome/config/sqlmap/com/${Globals.DbType}/**/*.xml</value>
+			</list>
+		</property>
+		<property name="dataSource" ref="jkthome.dataSource" />
+		<property name="configLocation" value="classpath:/jkthome/config/sqlmap/sqlmapConfig.xml" />
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory" />
+ 	</bean>
+	
+</beans>
